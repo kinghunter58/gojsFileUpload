@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Hello upload a file</h1>
+    <input type="file" accept="image/png"  onchange="uploadFile(this.files[0])">
+    <script>
+        function uploadFile(file) {
+            let reader = new FileReader;
+            let blob = file.slice(0, file.size -1);
+            reader.onloadend = function(evt) {
+                if (evt.target.readyState == FileReader.DONE) { // DONE == 2
+                    console.log(evt.target.result);
+                    let r = new XMLHttpRequest;
+                    r.onreadystatechange = function () {
+                        if (this.status == 4) {
+                            console.log(done);
+                        }
+                    }
+                    r.open("POST", "./file")
+                    r.send(evt.target.result)
+                    }
+                };
+            reader.readAsDataURL(file);
+            
+
+        }
+    </script>
+</body>
+</html>
